@@ -1,0 +1,43 @@
+# Perfil MOCK - Sin base de datos, solo datos en memoria
+spring:
+  application:
+    name: pos-backend-mock
+  
+  # Deshabilitar autoconfiguraciones de base de datos
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: INFO
+    com.pos: DEBUG
+    org.springframework.web: DEBUG
+
+# Configuración personalizada
+pos:
+  mode: mock
+  tax:
+    rate: 0.19
+  jwt:
+    secret: mock-secret-key-for-testing-purposes-only-minimum-256-bits
+    expiration-ms: 3600000
